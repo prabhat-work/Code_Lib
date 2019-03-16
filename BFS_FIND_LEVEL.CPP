@@ -8,41 +8,59 @@ using namespace std;
 #define endl "\n"
 typedef long long ll;
 
- vector<int>adj[10];   	// adjanceny list helps for finding nearby nodes
- bool vis[10];      	// checks for every visited node or not ?
- int level[10]; 	    // array which stores level of each node at end
- int bfs(int s)
+// finding level of each node in the given graph 
+ vector<int>adj[100005]; // used for 2D array
+ int level[10];
+ bool vis[100005];
+ int bfs(int i)
  {
- queue<int>q;  	 		// for pointing nodes in tree
- q.push(s);
- vis[s]=true;
- level[s]=0;
- while(!q.empty())
- {
- int p=q.front();
- int c=0;
- q.pop();
- for(int i=0;i<adj[p].size();i++)
- {
- 	if((vis[adj[p][i]]	==false)&&(i==x+1))
+ 	queue<int>qu;
+ 	int fr;
+ 	qu.push(i);
+ 	vis[i]=true;
+ 	level[i]=0;
+ while(!qu.empty() )
  	{
- 	level[adj[p][i]]=level[p]+1;
-	q.push(adj[p][i]);
-	vis[adj[p][i]]==true;
-	c++;
-	}
- }	
-}
- cout<<level[s]<<endl;
+	 fr=qu.front();
+	 qu.pop();
+	 for(int i=0;i<adj[fr].size();i++)
+	 {
+	 	if(vis[adj[fr][i]]==false)  
+	 	{
+	 		vis[adj[fr][i]]=true;
+	 		qu.push(adj[fr][i]);
+	 		level[adj[fr][i]]=level[fr]+1;
+		 }
+	 }
+   }
 }
 int main()
 {
- boost;
- #ifndef ONLINE_JUDGE
- freopen("input.txt", "r", stdin);
- #endif
- 
- int s;
- cin>>s;
- cout<<bfs(s)<<endl;
-}
+	 boost;
+	 #ifndef ONLINE_JUDGE
+	 //freopen("input.txt", "r", stdin);
+	 #endif 
+  // bfs implementation
+  
+  int n,c=0,e;
+  int x,y;
+  cin>>n;
+  cin>>e;
+  for(int i=0;i<e;i++)
+  {
+  cin>>x>>y;
+  adj[x].pb(y);
+  adj[y].pb(x);
+  }
+
+  for(int i=0;i<n;i++)
+  {
+  	if(vis[i]==false)
+  	{
+	  bfs(i);
+   }
+     cout<<i<<" -------- "<<level[i]<<endl;
+    }
+  }
+
+
