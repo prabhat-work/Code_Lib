@@ -68,6 +68,6 @@ int main()
  head->next->next->next->next->next=newnode(6);
  print(delmid(head));
 }
-
+hey 
  
 
