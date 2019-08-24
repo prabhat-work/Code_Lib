@@ -1,0 +1,40 @@
+ListNode* Solution::reverseBetween(ListNode* A, int B, int C) {
+    
+     ListNode *temp=new ListNode(0);
+     temp->next=A;
+     
+     ListNode *root=A;
+  
+     ListNode *prev=NULL;
+     ListNode *start=NULL;
+     ListNode *curr=temp;
+     ListNode *nxt =NULL;
+
+     ListNode *end =NULL;
+     
+     
+     int c=1;
+   
+     while(c!=B)
+     {
+         curr=curr->next;
+         c++;
+     }
+     
+     start=curr;
+     end=curr->next;
+     curr=curr->next;
+     
+     while(c!=(C+1))
+     {
+         nxt=curr->next;
+         curr->next=prev;
+         prev=curr;
+         curr=nxt;
+         c++;
+     }
+     start->next=prev;
+     end->next=curr; 
+     
+     return temp->next;
+}
